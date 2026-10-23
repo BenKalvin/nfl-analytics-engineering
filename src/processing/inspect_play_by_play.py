@@ -1,4 +1,5 @@
 
+from src.processing.validate_play_by_play import validate_play_by_play
 from pathlib import Path
 
 import polars as pl
@@ -12,6 +13,9 @@ def main():
     print("Reading NFL play-by-play data...")
 
     df = pl.read_parquet(DATA_FILE)
+    print("\n--- Running Data Quality Validation ---")
+    validate_play_by_play(df)
+    print("All data quality checks passed!")
 
     # 1. Basic dataset size
     print("\n--- Dataset Overview ---")
